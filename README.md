@@ -3,60 +3,59 @@
 import random
 
 word_list = ['python', 'java', 'kotlin', 'javascript']
-x = random.choice(word_list)
-y = ""
-z = 0
-b = ""
-for i in range(0, len(x)):
-    y = y + "-"
+random_word = random.choice(word_list)
+guess_word = ""
+chances = 0
+repeated_letters = ""
+for i in range(0, len(random_word)):
+    guess_word = guess_word + "-"
 print("H A N G M A N")
 option = input('Type "play" to play the game, "exit" to quit:')
 while True:
     if option == "play":
         print("")
-        print(y)
-        while z < 8 and "-" in y:
-            word = input("Input a letter: ")
-            if len(word) != 1:
+        print(guess_word)
+        while chances < 8 and "-" in guess_word:
+            input_letter = input("Input a letter: ")
+            if len(input_letter) != 1:
                 print("You should print a single letter")
-                if z != 8:
+                if chances != 8:
                     print("")
-                    print(y)
+                    print(guess_word)
                 continue
-            elif not word.islower():
+            elif not input_letter.islower():
                 print("It is not an ASCII lowercase letter")
-                if z != 8:
+                if chances != 8:
                     print("")
-                    print(y)
+                    print(guess_word)
                 continue
-            elif word in y or word in b:
+            elif input_letter in guess_word or input_letter in repeated_letters:
                 print("You already typed this letter")
-                if z != 8:
+                if chances != 8:
                     print("")
-                    print(y)
-            elif word.islower() and len(word) == 1:
-                if word in x and word not in y:
-                    for i in range(0, len(x)):
-                        if x[i] == word:
-                            y = y[:i] + word + y[i + 1:]
-                    if z != 8:
+                    print(guess_word)
+            elif input_letter.islower() and len(input_letter) == 1:
+                if input_letter in random_word and input_letter not in guess_word:
+                    for i in range(0, len(random_word)):
+                        if random_word[i] == input_letter:
+                            guess_word = guess_word[:i] + input_letter + guess_word[i + 1:]
+                    if chances != 8:
                         print("")
-                        print(y)
+                        print(guess_word)
                     continue
                 else:
                     print("No such letter in the word")
-                    z = z + 1
-                    b = b + word
-                    if z != 8:
+                    chances += 1
+                    repeated_letters = repeated_letters + input_letter
+                    if chances != 8:
                         print("")
-                        print(y)
+                        print(guess_word)
                     continue
-        if x == y:
+        if random_word == guess_word:
             print("You survived!")
             break
-        elif z == 8:
+        elif chances == 8:
             print("You are hanged!")
             break
     elif option == "exit":
         break
-

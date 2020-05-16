@@ -1,6 +1,5 @@
 # Python
-# Hangman game 
-# Write your code here
+# Hangman game python code with User Menu
 import random
 
 word_list = ['python', 'java', 'kotlin', 'javascript']
